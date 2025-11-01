@@ -1,8 +1,12 @@
-import { useContext, type ReactElement } from "react";
+import { useContext, useMemo, type ReactElement } from "react";
 import { MinigamesContext } from "~/context/minigames/MinigamesContext";
 
 const CaptchaWrapper = ({ children }: { children: ReactElement }) => {
     const { levelCount, currentLevel, currentDescription } = useContext(MinigamesContext);
+
+    const progress = useMemo(() => {
+        return ((currentLevel) / levelCount);
+    }, [currentLevel, levelCount]);
 
     return (
         <div className="flex items-center justify-center h-screen">
@@ -12,14 +16,12 @@ const CaptchaWrapper = ({ children }: { children: ReactElement }) => {
                     <div className="text-sm font-medium text-gray-700">
                         {currentDescription}
                     </div>
-                    
-                    <div className="text-sm font-medium text-gray-700">
-                        {currentLevel + 1} / {levelCount}
-                    </div>
+
+                    <progress value={progress} />
                 </div>
 
                 {/* Content area where your children go */}
-                <div className="">
+                <div className="p-2">
                     {children}
                 </div>
 
@@ -28,11 +30,11 @@ const CaptchaWrapper = ({ children }: { children: ReactElement }) => {
                     <div className="text-xs text-gray-500">reCAPTCHA</div>
                     <div className="flex space-x-2 text-[10px] text-gray-400">
                         <a href="#" className="hover:text-gray-600 underline">
-                            Privacy
+                            Confidentialité
                         </a>
                         <span>•</span>
                         <a href="#" className="hover:text-gray-600 underline">
-                            Terms
+                            Termes et conditions
                         </a>
                     </div>
                 </div>
