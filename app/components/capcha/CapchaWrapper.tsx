@@ -10,7 +10,7 @@ const CaptchaWrapper = ({ children }: { children: ReactElement }) => {
 
     return (
         <div className="flex items-center justify-center h-screen">
-            <div className="min-w-fit p-[5px] relative padding border rounded-lg shadow-md bg-white overflow-hidden font-sans">
+            <div className="min-w-200 p-[5px] relative padding border rounded-lg shadow-md bg-white overflow-hidden font-sans">
                 {/* Header */}
                 <div className="flex items-center justify-between px-3 py-2 bg-gray-100 border-b">
                     <div className="text-sm font-medium text-gray-700">
