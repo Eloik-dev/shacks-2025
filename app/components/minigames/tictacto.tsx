@@ -17,7 +17,7 @@ const WIN_LINES = [
 const initialBoard: Cell[] = Array(9).fill(null);
 
 const Tictacto: React.FC = () => {
-    const { updateDescription } = useContext(MinigamesContext);
+    const { updateDescription, nextLevel } = useContext(MinigamesContext);
 
     const [board, setBoard] = React.useState<Cell[]>(initialBoard);
     const [message, setMessage] = React.useState<string>(
@@ -44,7 +44,7 @@ const Tictacto: React.FC = () => {
     );
 
     useEffect(() => {
-        updateDescription('Gagnez au Tic-Tac-Toe pour prouver que vous êtes humain.');
+        updateDescription('Gagnez au Tictacto pour prouver que vous êtes humain.');
     }, [updateDescription]);
 
     function checkWinner(b: Cell[]) {
@@ -210,6 +210,7 @@ const Tictacto: React.FC = () => {
             setWinningLine(findWinningLine(next));
             setMessage("Vous avez gagné !");
             setGameOver(true);
+            nextLevel();
             return;
         }
         if (result === "draw") {
@@ -502,21 +503,24 @@ const Tictacto: React.FC = () => {
                         PERDANT
                     </button>
 
-                    <button
-                        onClick={reset}
-                        style={{
-                            background: 'linear-gradient(90deg,#ff2fb1,#00fff0)',
-                            color: '#001014',
-                            fontSize: 18,
-                            fontWeight: 800,
-                            padding: '10px 18px',
-                            borderRadius: 8,
-                            border: 'none',
-                            boxShadow: '0 8px 24px rgba(0,0,0,0.6)'
-                        }}
-                    >
-                        Recommencer
-                    </button>
+                    {/* Only show Recommencer here once the board is fully hidden (user requested) */}
+                    {hidden ? (
+                        <button
+                            onClick={reset}
+                            style={{
+                                background: 'linear-gradient(90deg,#ff2fb1,#00fff0)',
+                                color: '#001014',
+                                fontSize: 18,
+                                fontWeight: 800,
+                                padding: '10px 18px',
+                                borderRadius: 8,
+                                border: 'none',
+                                boxShadow: '0 8px 24px rgba(0,0,0,0.6)'
+                            }}
+                        >
+                            Recommencer
+                        </button>
+                    ) : null}
                 </div>
             ) : (
                 <p style={styles.small}>{message}</p>

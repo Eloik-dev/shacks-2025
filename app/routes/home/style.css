@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
+
 :root {
   --bg: #0f1724;
   --accent: #7dd3fc;
@@ -22,11 +24,13 @@ body {
   margin: 48px auto;
   padding: 24px;
 }
+
 .hero {
   padding: 50px;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
 }
+
 .hero {
   position: relative;
   z-index: 1;
@@ -36,11 +40,13 @@ body {
   content: none;
   display: none;
 }
+
 .title {
   color: var(--accent);
   margin: 0 0 8px;
   font-size: 2rem;
 }
+
 .lead {
   margin: 0 0 18px;
   color: #cbd5e1;
@@ -65,6 +71,7 @@ a {
   gap: 12px;
   align-items: center;
 }
+
 .cta {
   background: linear-gradient(90deg, #0284c7, #7dd3fc);
   color: #001219;
@@ -89,10 +96,12 @@ a {
 .team {
   margin-top: 28px;
 }
+
 .team h2 {
   color: var(--accent);
   margin: 0 0 12px;
 }
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -113,6 +122,7 @@ a {
   position: relative;
   z-index: 1;
 }
+
 .member-card {
   color: #e6f7ff;
   margin: 0 0 4px;
@@ -142,6 +152,7 @@ a {
   padding: 4px 8px;
   border-radius: 6px;
 }
+
 .member-card::before,
 .member-card::after {
   content: "";
@@ -156,12 +167,15 @@ a {
   mix-blend-mode: screen;
   z-index: 3;
 }
+
 .member-card::before {
   border: 2px solid #00ffe1;
 }
+
 .member-card::after {
   border: 2px solid #ff4da6;
 }
+
 .member-card:hover::before,
 .member-card:hover::after {
   opacity: 1;
@@ -185,11 +199,13 @@ a {
     transform: translate(0, 0);
   }
 }
+
 .member-role {
   color: var(--accent);
   margin: 0 0 8px;
   font-size: 0.9rem;
 }
+
 .member-bio {
   margin: 0;
   color: #cbd5e1;
@@ -209,6 +225,7 @@ a {
   .title {
     font-size: 1.5rem;
   }
+
   .cta::after {
     display: none;
   }
@@ -223,6 +240,7 @@ a {
   display: inline-block;
   z-index: 2;
 }
+
 .glitch[data-text] {
   font-weight: 700;
 }
@@ -262,42 +280,52 @@ a {
     clip: rect(2px, 9999px, 40px, 0);
     transform: translate(0, 0);
   }
+
   10% {
     clip: rect(10px, 9999px, 60px, 0);
     transform: translate(-2px, -1px);
   }
+
   20% {
     clip: rect(20px, 9999px, 40px, 0);
     transform: translate(2px, 1px);
   }
+
   30% {
     clip: rect(5px, 9999px, 25px, 0);
     transform: translate(-1px, 0);
   }
+
   40% {
     clip: rect(30px, 9999px, 70px, 0);
     transform: translate(1px, -1px);
   }
+
   50% {
     clip: rect(12px, 9999px, 45px, 0);
     transform: translate(-2px, 1px);
   }
+
   60% {
     clip: rect(22px, 9999px, 55px, 0);
     transform: translate(2px, 0);
   }
+
   70% {
     clip: rect(8px, 9999px, 30px, 0);
     transform: translate(-1px, -1px);
   }
+
   80% {
     clip: rect(26px, 9999px, 66px, 0);
     transform: translate(1px, 1px);
   }
+
   90% {
     clip: rect(14px, 9999px, 44px, 0);
     transform: translate(-2px, 0);
   }
+
   100% {
     clip: rect(2px, 9999px, 40px, 0);
     transform: translate(0, 0);
@@ -309,50 +337,62 @@ a {
     clip: rect(12px, 9999px, 52px, 0);
     transform: translate(0, 0);
   }
+
   8% {
     clip: rect(6px, 9999px, 30px, 0);
     transform: translate(2px, 1px);
   }
+
   16% {
     clip: rect(22px, 9999px, 62px, 0);
     transform: translate(-2px, -1px);
   }
+
   24% {
     clip: rect(2px, 9999px, 18px, 0);
     transform: translate(1px, 0);
   }
+
   32% {
     clip: rect(30px, 9999px, 70px, 0);
     transform: translate(-1px, 1px);
   }
+
   40% {
     clip: rect(10px, 9999px, 40px, 0);
     transform: translate(2px, 0);
   }
+
   48% {
     clip: rect(18px, 9999px, 58px, 0);
     transform: translate(-2px, -1px);
   }
+
   56% {
     clip: rect(4px, 9999px, 24px, 0);
     transform: translate(1px, -1px);
   }
+
   64% {
     clip: rect(26px, 9999px, 66px, 0);
     transform: translate(-1px, 0);
   }
+
   72% {
     clip: rect(14px, 9999px, 44px, 0);
     transform: translate(2px, 1px);
   }
+
   80% {
     clip: rect(6px, 9999px, 32px, 0);
     transform: translate(-2px, 0);
   }
+
   88% {
     clip: rect(20px, 9999px, 60px, 0);
     transform: translate(1px, -1px);
   }
+
   100% {
     clip: rect(12px, 9999px, 52px, 0);
     transform: translate(0, 0);

@@ -2,9 +2,9 @@ import "./style.css";
 import type { Route } from "./+types/home";
 import { useNavigate } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "CaptGame — Hack" },
+    { title: "CaptGame - Hack" },
     {
       name: "description",
       content: "Présentation du hack Captcha — un captcha innovant.",
@@ -21,7 +21,7 @@ export default function Home() {
 
   const team = [
     {
-      name: "Éloik Rousseau",
+      name: "Éloïk Rousseau",
       role: "Bac informatique",
       bio: "Gerer le comportement du captcha",
     },
