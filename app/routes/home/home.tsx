@@ -29,12 +29,12 @@ export default function Home() {
     },
     {
       name: "Kevin Boulanger",
-      role: "Bac en génie informatique (Level: Noob)",
+      role: "Bac en génie informatique",
       bio: "Développeur de l'étape Clicker",
     },
     {
       name: "Léanne Héroux",
-      role: "Bac en génie informatique (Level: Copilot)",
+      role: "Bac en génie informatique",
       bio: "Développeur de l'étape Tictacto",
     },
   ];

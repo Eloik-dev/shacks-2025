@@ -1,5 +1,4 @@
 import Minigames from "~/containers/minigames/clicker/minigames";
-import './style.css';
 import type { Route } from "./+types/capchat";
 import Capcha from "~/containers/capcha/Capcha";
 

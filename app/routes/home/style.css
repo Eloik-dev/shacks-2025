@@ -76,32 +76,6 @@ body::before {
   position: relative;
   overflow: hidden;
 }
-.cta:focus {
-  outline: 2px solid rgba(125, 211, 252, 0.3);
-}
-
-/* petit effet binaire sur le bouton */
-.cta::after {
-  content: "010010010010010010010010";
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: monospace;
-  font-size: 0.85rem;
-  color: var(--binary-default);
-  letter-spacing: 2px;
-  transition:
-    transform 0.35s ease,
-    color 0.25s ease,
-    opacity 0.25s ease;
-  opacity: 0.9;
-}
-.cta:hover::after {
-  transform: translateY(-50%) translateX(-6px);
-  color: var(--binary-active);
-  opacity: 1;
-}
 
 .github {
   color: var(--muted);
