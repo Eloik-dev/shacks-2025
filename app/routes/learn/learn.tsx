@@ -1,5 +1,6 @@
 import { useGlobalContext } from "~/context/GlobalContext";
 import "./style.css";
+import { useMemo } from "react";
 
 export function meta(_: any) {
   return [
@@ -13,13 +14,18 @@ export function meta(_: any) {
 }
 
 export default function Learn() {
-
   const { humanPercentage } = useGlobalContext();
+
+  
+
+  const processedHumanPercentage: number = useMemo(() => {
+    return Math.round(humanPercentage || 0);
+  }, [humanPercentage]);
 
   return (
     <main className="learn-container">
       <header>
-        <h1 className="title">Vous êtes {humanPercentage}% humain.</h1>
+        <h1 className="title">Vous êtes {processedHumanPercentage}% humain.</h1>
         <h2 className="title">CAPTCHA et IA — Réinventer la sécurité</h2>
         <p className="lead">
           Comment et pourquoi notre solution est née

@@ -1,4 +1,5 @@
-import { createContext, useState, useCallback, useContext } from "react";
+import { createContext, useState, useCallback, useContext, useEffect } from "react";
+import Cookies from "js-cookie";
 
 interface IGlobalContext {
     humanPercentage: number;
@@ -8,8 +9,13 @@ interface IGlobalContext {
 const GlobalContext = createContext<IGlobalContext | undefined>(undefined);
 
 export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
-    const [humanPercentage, setHumanPercentage] = useState(0);
-    const [totalWeight, setTotalWeight] = useState(0);
+    const [humanPercentage, setHumanPercentage] = useState<number>(() => {
+        // Initialize from cookie if available
+        const saved = Cookies.get("humanPercentage");
+        return saved ? parseFloat(saved) : 0;
+    });
+
+    const [totalWeight, setTotalWeight] = useState<number>(0);
 
     const updateHumanPercentage = useCallback(
         (percentage: number, ponderation: number) => {
@@ -24,6 +30,11 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         },
         [totalWeight]
     );
+
+    // Persist to cookie whenever it changes
+    useEffect(() => {
+        Cookies.set("humanPercentage", String(humanPercentage), { expires: 30 }); // 30 days
+    }, [humanPercentage]);
 
     return (
         <GlobalContext.Provider value={{ humanPercentage, updateHumanPercentage }}>
