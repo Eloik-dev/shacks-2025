@@ -1,7 +1,9 @@
+import Tictacto from "~/components/minigames/tictacto";
+
 const Minigames = () => {
     return (
         <>
-            <h1>Minigames</h1>
+            <Tictacto/>
         </>
     );
 }

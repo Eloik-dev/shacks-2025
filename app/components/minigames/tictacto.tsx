@@ -1,4 +1,4 @@
-const Clicker = () => {
+const Tictacto = () => {
     return (
         <>
             <h1>Clicker Minigame</h1>
@@ -6,4 +6,4 @@ const Clicker = () => {
     );
 }
 
-export default Clicker;
+export default Tictacto;
