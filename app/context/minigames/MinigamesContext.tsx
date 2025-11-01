@@ -17,7 +17,7 @@ const MinigamesContext = createContext<IMinigamesContext>({
 });
 
 const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
-    const [currentLevel, setCurrentLevel] = useState(1);
+    const [currentLevel, setCurrentLevel] = useState(0);
     const [capchaSolved, setCapchaSolved] = useState(false);
     const [levelCount, setLevelCount] = useState(levels.length);
 
