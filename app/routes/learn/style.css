@@ -1,0 +1,50 @@
+.learn-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
+  color: #eaeaea;
+}
+.learn-container .title {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+.learn-container .lead {
+  color: #cfcfcf;
+  margin-bottom: 1rem;
+}
+h1 {
+  color: #7dd3fc;
+}
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 0.9rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+}
+.card h2 {
+  margin-top: 0;
+  color: #7dd3fc;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.cta {
+  background: linear-gradient(90deg, #0284c7, #7dd3fc);
+  color: #001219;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}

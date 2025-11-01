@@ -6,7 +6,7 @@ export function meta({ }: Route.MetaArgs) {
     { title: "CaptGame - Hack" },
     {
       name: "description",
-      content: "Présentation du hack Capchat - un captcha innovant.",
+      content: "Présentation du hack Captcha — un captcha innovant.",
     },
   ];
 }
@@ -37,15 +37,8 @@ export default function Home() {
 
   return (
     <main className="home-container">
-      <header>
-        <h1
-          className="title glitch"
-          data-text="01010101010101010101010101010101010101010101010101010101010101010"
-        >
-          01010101010101010101010101010101010101010101010101010101010101010
-        </h1>
-      </header>
-      <section className="hero">
+      <header></header>
+      <section className="card">
         <h1 className="title">CaptGame — le captcha réinventé</h1>
 
         <p className="lead">
@@ -55,26 +48,28 @@ export default function Home() {
 
         <div className="actions">
           <a className="cta" href="/capchat">
-            Accéder à la démo
+            Tester notre solution
           </a>
+
           <a
-            className="github"
+            className="cta git"
             href="https://github.com/Eloik-dev/shacks-2025"
             target="_blank"
-            rel="noopener noreferrer"
           >
             Voir le GitHub
           </a>
         </div>
       </section>
 
-      <section className="team">
+      <section className="card">
         <h1 className="title">Les cabaniers</h1>
         <div className="team-grid">
           {team.map((m) => (
             <article key={m.name} className="member-card">
               <div className="member-info">
-                <h3 className="member-name glitch" data-text={m.name}>{m.name}</h3>
+                <h3 className="member-name glitch" data-text={m.name}>
+                  {m.name}
+                </h3>
                 <p className="member-role">{m.role}</p>
                 <p className="member-bio">{m.bio}</p>
               </div>
@@ -82,14 +77,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <footer>
-        <h1
-          className="title glitch"
-          data-text="01010101010101010101010101010101010101010101010101010101010101010"
-        >
-          01010101010101010101010101010101010101010101010101010101010101010
-        </h1>
-      </footer>
     </main>
   );
 }

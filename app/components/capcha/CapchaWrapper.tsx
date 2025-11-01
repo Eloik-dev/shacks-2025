@@ -10,7 +10,7 @@ const CaptchaWrapper = ({ children }: { children: ReactElement }) => {
 
     return (
         <div className="flex items-center justify-center h-screen">
-            <div className="w-1/2 p-[5px] relative padding border rounded-lg shadow-md bg-white overflow-hidden font-sans">
+            <div className="w-1/3 p-[5px] relative padding border rounded-lg shadow-md bg-white overflow-hidden font-sans">
                 {/* Header */}
                 <div className="flex items-center justify-between px-3 py-2 bg-gray-100 border-b">
                     <div className="text-sm font-medium text-gray-700">
@@ -27,7 +27,7 @@ const CaptchaWrapper = ({ children }: { children: ReactElement }) => {
 
                 {/* Footer (reCAPTCHA branding style) */}
                 <div className="flex items-center justify-between px-3 py-2 border-t bg-gray-100">
-                    <div className="text-xs text-gray-500">reCAPTCHA</div>
+                    <div className="text-xs text-gray-500">reCAPTGAME</div>
                     <div className="flex space-x-2 text-[10px] text-gray-400">
                         <a href="#" className="hover:text-gray-600 underline">
                             Confidentialité

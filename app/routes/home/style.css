@@ -2,32 +2,21 @@
 
 :root {
   --bg: #0f1724;
-  --card: #0b1220;
   --accent: #7dd3fc;
-  --muted: #94a3b8;
-  --binary-default: rgba(255, 255, 255, 0.06);
-  --binary-dark: rgba(0, 0, 0, 0.06);
-  --binary-active: #7cfc00;
 }
 
-* {
-  box-sizing: border-box;
-}
-
+/* Ensure the entire page uses a single uniform background color
+   and cover the full viewport to avoid top/bottom bands. */
+html,
 body {
   margin: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   position: relative;
-  font-family: 'Varela', sans-serif;
+  font-family: "Varela", sans-serif;
   color: var(--muted);
-  background: linear-gradient(180deg, #071224 0%, #081428 100%);
-}
-
-/* Overlay binaire global pour '0101' partout sur le site */
-body::before {
-  content: none;
-  display: none;
+  background: var(--bg) !important;
+  background-attachment: fixed;
 }
 
 .home-container {
@@ -37,9 +26,8 @@ body::before {
 }
 
 .hero {
-  padding: 28px 20px;
+  padding: 50px;
   border-radius: 12px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
   box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
 }
 
@@ -65,6 +53,19 @@ body::before {
   line-height: 1.45;
 }
 
+a {
+  margin: 0 0 18px;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 0.9rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+}
 .actions {
   display: flex;
   gap: 12px;
@@ -75,18 +76,21 @@ body::before {
   background: linear-gradient(90deg, #0284c7, #7dd3fc);
   color: #001219;
   border: none;
-  padding: 10px 16px;
+  padding: 0 16px;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  font-size: 0.95rem;
 }
 
-.github {
-  color: var(--muted);
-  text-decoration: underline;
-  font-size: 0.95rem;
+.git {
+  background: linear-gradient(90deg, #7dd3fc, #0284c7);
 }
 
 .team {
@@ -107,26 +111,11 @@ body::before {
 .member-card {
   position: relative;
   z-index: 0;
-  /* stacking for its background pseudo */
   padding: 18px;
   border-radius: 10px;
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.01),
-      rgba(255, 255, 255, 0.02));
+  background: #091734;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-/* effet binaire 010 en fond via ::before */
-.member-card::before {
-  content: none;
-  display: none;
-}
-
-.member-card:hover::before {
-  opacity: 0.18;
-  transform: translateX(0);
-  color: var(--binary-active);
 }
 
 .member-info {
@@ -197,19 +186,15 @@ body::before {
   0% {
     transform: translate(0, 0);
   }
-
   25% {
     transform: translate(2px, -1px);
   }
-
   50% {
     transform: translate(-1px, 2px);
   }
-
   75% {
     transform: translate(1px, 1px);
   }
-
   100% {
     transform: translate(0, 0);
   }
@@ -414,47 +399,12 @@ body::before {
   }
 }
 
-/* On hover, intensify the chroma and show also the global binary highlight */
-.glitch:hover::before,
-.glitch:hover::after {
-  opacity: 1;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
-}
-
-body {
-  margin: 0;
-  height: 100vh;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  font-family: monospace;
-  color: #0f0;
-}
-
-.hacker-text {
-  font-size: 2rem;
-  line-height: 1.5;
-  white-space: pre;
-  cursor: pointer;
-  transition: transform 0.3s, color 0.3s;
-}
-
-/* Hover effect */
-.hacker-text:hover {
-  color: #ff0;
-  transform: scale(1.2);
-}
-
 /* Generate random 0s and 1s */
 @keyframes flicker {
-
   0%,
   100% {
     opacity: 1;
   }
-
   50% {
     opacity: 0.2;
   }
