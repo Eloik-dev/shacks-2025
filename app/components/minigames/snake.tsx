@@ -3,12 +3,12 @@ import "./snake.css";
 
 type Point = { x: number; y: number };
 
-const GRID_SIZE = 20; // number of cells per row/col
+const GRID_SIZE = 10; // number of cells per row/col
 const CELL_SIZE = 24; // pixels per cell (bigger so snake is clearly visible)
 const CANVAS_SIZE = GRID_SIZE * CELL_SIZE;
 const TICK_INITIAL = 120; // ms per move
 const ORB_SCORE = 10; // points per orb
-const WIN_SCORE = 500;
+const WIN_SCORE = 200;
 
 const randomPoint = (exclude: Point[] = []): Point => {
     while (true) {
