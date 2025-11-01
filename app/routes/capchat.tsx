@@ -1,13 +1,13 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import Minigames from "~/containers/minigames/clicker/Minigames";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Capchat" },
+    { name: "description", content: "Veuillez compléter le capchat" },
   ];
 }
 
-export default function Home() {
-  return <Welcome />;
+export default function Capchat() {
+  return <Minigames />;
 }
