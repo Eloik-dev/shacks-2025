@@ -6,10 +6,14 @@ import locked from "~/../public/images/Cadenas_ferme-removebg-preview.png";
 
 // Targets
 const randomPositionTarget = 10;
-const victoryTarget = 20;
+const randomMovingTarget = 20;
+const victoryTarget = 30;
 
 // Visual offsets
 const offsetY = -30;
+
+// Clicker Minigame Component
+const moveSpeed = 100;
 
 const Clicker = () => {
     const { updateDescription, resetCapcha, nextLevel } = useContext(MinigamesContext);
@@ -35,13 +39,30 @@ const Clicker = () => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [timer]);
+    }, [timer, resetCapcha]);
+
+    // Moving target logic
+    useEffect(() => {
+        if (count < randomMovingTarget) return;
+
+        const moveInterval = setInterval(() => {
+            // Random direction movement
+            setRandomX(prevX => prevX + (Math.random() * 2 - 1) * moveSpeed);
+            setRandomY(prevY => prevY + (Math.random() * 2 - 1) * moveSpeed);
+
+            // Optional: keep within screen bounds
+            setRandomX(prevX => Math.max(Math.min(prevX, 400), -400));
+            setRandomY(prevY => Math.max(Math.min(prevY, 400), -400));
+        }, 100); // update every 100ms
+
+        return () => clearInterval(moveInterval);
+    }, [count]);
 
     const handleClick = () => {
         const newCount = count + 1;
         setCount(newCount);
 
-        if (newCount >= randomPositionTarget) {
+        if (newCount >= randomPositionTarget && newCount < randomMovingTarget) {
             setRandomX(Math.round(Math.random() * 800) - 400);
             setRandomY(Math.round(Math.random() * 800) - 400);
         }
@@ -61,20 +82,20 @@ const Clicker = () => {
             </div>
 
             {/* Clickable lock */}
-            <div className="flex items-center justify-center h-150">
+            <div className="flex items-center justify-center h-150 select-none">
                 <button
                     onClick={handleClick}
                     disabled={isUnlocked || showRestart}
-                    className="relative flex items-center justify-center w-36 h-36 rounded-full bg-transparent active:scale-95 transition-transform"
-                    style={{ marginLeft: randomX, marginTop: randomY }}
+                    className="relative cursor-pointer flex items-center justify-center w-36 h-36 rounded-full bg-transparent active:scale-95 transition-transform select-none"
+                    style={{ marginLeft: randomX, marginTop: randomY, transition: "margin 0.3s" }}
                 >
                     <img
                         src={isUnlocked ? unlocked : locked}
                         alt={isUnlocked ? "Cadenas ouvert" : "Cadenas fermé"}
-                        className="w-full h-full object-contain pointer-events-none"
+                        className="w-full h-full object-contain pointer-events-none select-none"
                     />
                     <span
-                        className="absolute text-white text-3xl font-bold"
+                        className="absolute text-white text-3xl font-bold pointer-events-none select-none"
                         style={{ top: `${offsetY}px` }}
                     >
                         {count}
