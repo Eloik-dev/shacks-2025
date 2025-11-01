@@ -1,6 +1,5 @@
 import "./style.css";
 import type { Route } from "./+types/home";
-import { useNavigate } from "react-router";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -13,12 +12,6 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const navigate = useNavigate();
-
-  const ouvrirCapchat = () => {
-    navigate("/capchat");
-  };
-
   const team = [
     {
       name: "Éloïk Rousseau",
@@ -54,18 +47,17 @@ export default function Home() {
         </p>
 
         <div className="actions">
-          <button className="cta" onClick={ouvrirCapchat}>
+          <a className="cta" href="/capchat">
             Tester notre solution
-          </button>
+          </a>
 
-          <button
+          <a
             className="cta git"
-            onClick={() =>
-              window.open("https://github.com/Eloik-dev/shacks-2025", "_blank")
-            }
+            href="https://github.com/Eloik-dev/shacks-2025"
+            target="_blank"
           >
             Voir le GitHub
-          </button>
+          </a>
         </div>
       </section>
 
