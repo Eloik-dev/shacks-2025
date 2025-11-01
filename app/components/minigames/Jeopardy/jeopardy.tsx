@@ -1,4 +1,4 @@
-import { useState, useRef, useContext, useEffect } from "react";
+import { useState, useRef, useContext, useEffect, use } from "react";
 import impossibleQuestions2 from "./impossibleQuestions2.js";
 import { useMinigamesContext } from "~/context/MinigamesContext.js";
 import { useGlobalContext } from "~/context/GlobalContext.js";
@@ -12,7 +12,7 @@ const shuffleArray = (array: any[]) => {
 
 const Jeopardy = () => {
   const { updateHumanPercentage } = useGlobalContext();
-  const { nextLevel } = useMinigamesContext();
+  const { nextLevel, updateDescription } = useMinigamesContext();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -25,6 +25,10 @@ const Jeopardy = () => {
   const [timer, setTimer] = useState(10);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    updateDescription("Répondez aux questions pour prouver que vous êtes humain.");
+  }, [updateDescription]);
 
   // shuffle options à chaque nouvelle question
   useEffect(() => {
@@ -83,44 +87,46 @@ const Jeopardy = () => {
   const q = questions[currentIndex];
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
-      {/* Timer */}
-      <div className="mb-4 text-2xl font-bold">Temps restant : {timer}s</div>
+    <div className="h-full items-center justify-center bg-gray-900">
+      <div className="flex flex-col items-center justify-center h-150 bg-gray-900 text-white">
+        {/* Timer */}
+        <div className="mb-4 text-2xl font-bold">Temps restant : {timer}s</div>
 
-      {/* Question */}
-      <div className="bg-gray-800 p-6 rounded-2xl shadow-lg w-3/4 text-center mb-6 text-xl font-semibold">
-        {q.question}
-      </div>
+        {/* Question */}
+        <div className="bg-gray-800 p-6 rounded-2xl shadow-lg w-3/4 text-center mb-6 text-xl font-semibold">
+          {q.question}
+        </div>
 
-      {/* Options 2x2 */}
-      <div className="grid grid-cols-2 gap-4">
-        {shuffledOptions.map((option, i) => {
-          const isCorrect = option === q.answer;
-          const isSelected = option === selected;
+        {/* Options 2x2 */}
+        <div className="grid grid-cols-2 gap-4">
+          {shuffledOptions.map((option, i) => {
+            const isCorrect = option === q.answer;
+            const isSelected = option === selected;
 
-          return (
-            <button
-              key={i}
-              onClick={() => handleAnswer(option)}
-              className={`w-48 h-24 rounded-xl text-lg font-medium transition-all duration-300
+            return (
+              <button
+                key={i}
+                onClick={() => handleAnswer(option)}
+                className={`w-48 h-24 rounded-xl text-lg font-medium transition-all duration-300
                 ${showAnswer
-                  ? isCorrect
-                    ? "bg-green-600 scale-105"
-                    : isSelected
-                      ? "bg-red-600 scale-95"
-                      : "bg-gray-700"
-                  : "bg-gray-700 hover:bg-gray-600 active:scale-95"
-                }`}
-            >
-              {option}
-            </button>
-          );
-        })}
-      </div>
+                    ? isCorrect
+                      ? "bg-green-600 scale-105"
+                      : isSelected
+                        ? "bg-red-600 scale-95"
+                        : "bg-gray-700"
+                    : "bg-gray-700 hover:bg-gray-600 active:scale-95"
+                  }`}
+              >
+                {option}
+              </button>
+            );
+          })}
+        </div>
 
-      {/* Progression */}
-      <div className="mt-8 text-lg">
-        Question {currentIndex + 1} / 5 | Score : {score}
+        {/* Progression */}
+        <div className="mt-8 text-lg">
+          Question {currentIndex + 1} / 5 | Score : {score}
+        </div>
       </div>
     </div>
   );
