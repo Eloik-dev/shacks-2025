@@ -1,4 +1,4 @@
-import Minigames from "~/containers/minigames/clicker/minigames";
+import Capcha from "~/containers/capcha/Capcha";
 import type { Route } from "./+types/capchat";
 
 export function meta({}: Route.MetaArgs) {
@@ -9,5 +9,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Capchat() {
-  return <Minigames />;
+  return <Capcha />;
 }

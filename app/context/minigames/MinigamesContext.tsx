@@ -1,6 +1,9 @@
 import { createContext, useEffect, useState, type ReactElement } from "react";
+import CaptchaWrapper from "~/components/capcha/CapchaWrapper";
 
 interface IMinigamesContext {
+    currentDescription: string;
+    updateDescription: (description: string) => void;
     nextLevel: () => void;
     capchaSolved: boolean;
     setCapchaSolved: (solved: boolean) => void;
@@ -10,6 +13,8 @@ interface IMinigamesContext {
 };
 
 const MinigamesContext = createContext<IMinigamesContext>({
+    currentDescription: '',
+    updateDescription: () => { },
     nextLevel: () => { },
     capchaSolved: false,
     setCapchaSolved: () => { },
@@ -19,6 +24,7 @@ const MinigamesContext = createContext<IMinigamesContext>({
 });
 
 const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
+    const [currentDescription, setCurrentDescription] = useState('Veuillez compléter le captcha pour accéder au site');
     const [currentLevel, setCurrentLevel] = useState(0);
     const [capchaSolved, setCapchaSolved] = useState(false);
     const [levelCount, setLevelCount] = useState(levels.length);
@@ -27,6 +33,10 @@ const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
     useEffect(() => {
         setLevelCount(levels.length);
     }, [levels]);
+
+    const updateDescription = (description: string) => {
+        setCurrentDescription(description);
+    }
 
     const nextLevel = () => {
         setVictory(true);
@@ -49,6 +59,8 @@ const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
 
     return (
         <MinigamesContext.Provider value={{
+            currentDescription,
+            updateDescription,
             nextLevel,
             capchaSolved,
             setCapchaSolved,
@@ -56,7 +68,9 @@ const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
             levelCount,
             victory,
         }}>
-            {levels[currentLevel]}
+            <CaptchaWrapper>
+                {levels[currentLevel]}
+            </CaptchaWrapper>
         </MinigamesContext.Provider>
     );
 }
