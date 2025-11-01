@@ -1,3 +1,4 @@
+import { useGlobalContext } from "~/context/GlobalContext";
 import "./style.css";
 
 export function meta(_: any) {
@@ -12,10 +13,14 @@ export function meta(_: any) {
 }
 
 export default function Learn() {
+
+  const { humanPercentage } = useGlobalContext();
+
   return (
     <main className="learn-container">
       <header>
-        <h1 className="title">CAPTCHA et IA — Réinventer la sécurité</h1>
+        <h1 className="title">Vous êtes {humanPercentage}% humain.</h1>
+        <h2 className="title">CAPTCHA et IA — Réinventer la sécurité</h2>
         <p className="lead">
           Comment et pourquoi notre solution est née
         </p>

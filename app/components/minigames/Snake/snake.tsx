@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./snake.css";
-import { MinigamesContext } from "~/context/minigames/MinigamesContext";
+import { useMinigamesContext } from "~/context/MinigamesContext";
+import { useGlobalContext } from "~/context/GlobalContext";
 
 type Point = { x: number; y: number };
 
@@ -19,7 +20,8 @@ const randomPoint = (exclude: Point[] = []): Point => {
 };
 
 const Snake: React.FC = () => {
-    const { updateDescription, nextLevel } = useContext(MinigamesContext);
+    const { updateHumanPercentage } = useGlobalContext();
+    const { updateDescription, nextLevel } = useMinigamesContext();
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [snake, setSnake] = useState<Point[]>([{ x: 8, y: 10 }, { x: 7, y: 10 }, { x: 6, y: 10 }]);

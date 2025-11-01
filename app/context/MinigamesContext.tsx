@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState, type ReactElement } from "react";
-import { redirect, useNavigate } from "react-router";
+import { createContext, useContext, useEffect, useState, type ReactElement } from "react";
+import { useNavigate } from "react-router";
 import CaptchaWrapper from "~/components/capcha/CapchaWrapper";
 
 interface IMinigamesContext {
@@ -24,7 +24,7 @@ const MinigamesContext = createContext<IMinigamesContext>({
     victory: false,
 });
 
-const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
+export const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
     const navigate = useNavigate();
     const [currentDescription, setCurrentDescription] = useState('');
     const [currentLevel, setCurrentLevel] = useState(0);
@@ -75,4 +75,8 @@ const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
     );
 }
 
-export { MinigamesProvider, MinigamesContext };
+export const useMinigamesContext = () => {
+    const ctx = useContext(MinigamesContext);
+    if (!ctx) throw new Error("useMinigamesProvider must be used within MinigamesProvider");
+    return ctx;
+};
