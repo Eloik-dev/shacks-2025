@@ -31,7 +31,7 @@ export default function Home() {
     {
       name: "Léanne Héroux",
       role: "Bac en génie informatique",
-      bio: "Développeur de l'étape Tictacto",
+      bio: "Développeur de l'étape Tictacto et Astéroïdes",
     },
   ];
 
@@ -42,7 +42,7 @@ export default function Home() {
         <h1 className="title">CaptGame — le captcha réinventé</h1>
 
         <p className="lead">
-          Voici notre 'Hack', c'est un Capchat innovant qui est très sécurisé contre les IA
+          Voici notre 'Hack'. C'est un Capchat innovant qui est très sécurisé contre les IA
           et offre une expérience utilisateur unique.
         </p>
 
