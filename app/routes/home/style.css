@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
+
 :root {
   --bg: #0f1724;
   --card: #0b1220;
@@ -8,11 +10,10 @@
   --binary-active: #7cfc00;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
-
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   width: 100%;
@@ -34,12 +35,14 @@ body::before {
   margin: 48px auto;
   padding: 24px;
 }
+
 .hero {
   padding: 28px 20px;
   border-radius: 12px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
   box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
 }
+
 .hero {
   position: relative;
   z-index: 1;
@@ -49,11 +52,13 @@ body::before {
   content: none;
   display: none;
 }
+
 .title {
   color: var(--accent);
   margin: 0 0 8px;
   font-size: 2rem;
 }
+
 .lead {
   margin: 0 0 18px;
   color: #cbd5e1;
@@ -65,6 +70,7 @@ body::before {
   gap: 12px;
   align-items: center;
 }
+
 .cta {
   background: linear-gradient(90deg, #0284c7, #7dd3fc);
   color: #001219;
@@ -86,10 +92,12 @@ body::before {
 .team {
   margin-top: 28px;
 }
+
 .team h2 {
   color: var(--accent);
   margin: 0 0 12px;
 }
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -98,14 +106,13 @@ body::before {
 
 .member-card {
   position: relative;
-  z-index: 0; /* stacking for its background pseudo */
+  z-index: 0;
+  /* stacking for its background pseudo */
   padding: 18px;
   border-radius: 10px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.01),
-    rgba(255, 255, 255, 0.02)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.01),
+      rgba(255, 255, 255, 0.02));
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.03);
 }
@@ -115,6 +122,7 @@ body::before {
   content: none;
   display: none;
 }
+
 .member-card:hover::before {
   opacity: 0.18;
   transform: translateX(0);
@@ -125,6 +133,7 @@ body::before {
   position: relative;
   z-index: 1;
 }
+
 .member-card {
   color: #e6f7ff;
   margin: 0 0 4px;
@@ -154,6 +163,7 @@ body::before {
   padding: 4px 8px;
   border-radius: 6px;
 }
+
 .member-card::before,
 .member-card::after {
   content: "";
@@ -168,12 +178,15 @@ body::before {
   mix-blend-mode: screen;
   z-index: 3;
 }
+
 .member-card::before {
   border: 2px solid #00ffe1;
 }
+
 .member-card::after {
   border: 2px solid #ff4da6;
 }
+
 .member-card:hover::before,
 .member-card:hover::after {
   opacity: 1;
@@ -181,17 +194,33 @@ body::before {
 }
 
 @keyframes glitch-border {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(2px, -1px); }
-  50% { transform: translate(-1px, 2px); }
-  75% { transform: translate(1px, 1px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(2px, -1px);
+  }
+
+  50% {
+    transform: translate(-1px, 2px);
+  }
+
+  75% {
+    transform: translate(1px, 1px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
+
 .member-role {
   color: var(--accent);
   margin: 0 0 8px;
   font-size: 0.9rem;
 }
+
 .member-bio {
   margin: 0;
   color: #cbd5e1;
@@ -211,6 +240,7 @@ body::before {
   .title {
     font-size: 1.5rem;
   }
+
   .cta::after {
     display: none;
   }
@@ -225,6 +255,7 @@ body::before {
   display: inline-block;
   z-index: 2;
 }
+
 .glitch[data-text] {
   font-weight: 700;
 }
@@ -264,42 +295,52 @@ body::before {
     clip: rect(2px, 9999px, 40px, 0);
     transform: translate(0, 0);
   }
+
   10% {
     clip: rect(10px, 9999px, 60px, 0);
     transform: translate(-2px, -1px);
   }
+
   20% {
     clip: rect(20px, 9999px, 40px, 0);
     transform: translate(2px, 1px);
   }
+
   30% {
     clip: rect(5px, 9999px, 25px, 0);
     transform: translate(-1px, 0);
   }
+
   40% {
     clip: rect(30px, 9999px, 70px, 0);
     transform: translate(1px, -1px);
   }
+
   50% {
     clip: rect(12px, 9999px, 45px, 0);
     transform: translate(-2px, 1px);
   }
+
   60% {
     clip: rect(22px, 9999px, 55px, 0);
     transform: translate(2px, 0);
   }
+
   70% {
     clip: rect(8px, 9999px, 30px, 0);
     transform: translate(-1px, -1px);
   }
+
   80% {
     clip: rect(26px, 9999px, 66px, 0);
     transform: translate(1px, 1px);
   }
+
   90% {
     clip: rect(14px, 9999px, 44px, 0);
     transform: translate(-2px, 0);
   }
+
   100% {
     clip: rect(2px, 9999px, 40px, 0);
     transform: translate(0, 0);
@@ -311,50 +352,62 @@ body::before {
     clip: rect(12px, 9999px, 52px, 0);
     transform: translate(0, 0);
   }
+
   8% {
     clip: rect(6px, 9999px, 30px, 0);
     transform: translate(2px, 1px);
   }
+
   16% {
     clip: rect(22px, 9999px, 62px, 0);
     transform: translate(-2px, -1px);
   }
+
   24% {
     clip: rect(2px, 9999px, 18px, 0);
     transform: translate(1px, 0);
   }
+
   32% {
     clip: rect(30px, 9999px, 70px, 0);
     transform: translate(-1px, 1px);
   }
+
   40% {
     clip: rect(10px, 9999px, 40px, 0);
     transform: translate(2px, 0);
   }
+
   48% {
     clip: rect(18px, 9999px, 58px, 0);
     transform: translate(-2px, -1px);
   }
+
   56% {
     clip: rect(4px, 9999px, 24px, 0);
     transform: translate(1px, -1px);
   }
+
   64% {
     clip: rect(26px, 9999px, 66px, 0);
     transform: translate(-1px, 0);
   }
+
   72% {
     clip: rect(14px, 9999px, 44px, 0);
     transform: translate(2px, 1px);
   }
+
   80% {
     clip: rect(6px, 9999px, 32px, 0);
     transform: translate(-2px, 0);
   }
+
   88% {
     clip: rect(20px, 9999px, 60px, 0);
     transform: translate(1px, -1px);
   }
+
   100% {
     clip: rect(12px, 9999px, 52px, 0);
     transform: translate(0, 0);
@@ -367,39 +420,47 @@ body::before {
   opacity: 1;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
 }
- body {
-    margin: 0;
-    height: 100vh;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    font-family: monospace;
-    color: #0f0;
+
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: monospace;
+  color: #0f0;
+}
+
+.hacker-text {
+  font-size: 2rem;
+  line-height: 1.5;
+  white-space: pre;
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+}
+
+/* Hover effect */
+.hacker-text:hover {
+  color: #ff0;
+  transform: scale(1.2);
+}
+
+/* Generate random 0s and 1s */
+@keyframes flicker {
+
+  0%,
+  100% {
+    opacity: 1;
   }
 
-  .hacker-text {
-    font-size: 2rem;
-    line-height: 1.5;
-    white-space: pre;
-    cursor: pointer;
-    transition: transform 0.3s, color 0.3s;
+  50% {
+    opacity: 0.2;
   }
+}
 
-  /* Hover effect */
-  .hacker-text:hover {
-    color: #ff0;
-    transform: scale(1.2);
-  }
-
-  /* Generate random 0s and 1s */
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
-  }
-
-  .digit {
-    display: inline-block;
-    animation: flicker 0.5s infinite;
-  }
+.digit {
+  display: inline-block;
+  animation: flicker 0.5s infinite;
+}

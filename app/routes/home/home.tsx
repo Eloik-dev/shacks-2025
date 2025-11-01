@@ -1,7 +1,7 @@
 import "./style.css";
 import type { Route } from "./+types/home";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "CaptGame — Hack" },
     {
@@ -12,13 +12,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const ouvrirCapchat = () => {
-    // TODO: implémenter l'ouverture du Capchat ici
-  };
-
   const team = [
     {
-      name: "Éloik Rousseau",
+      name: "Éloïk Rousseau",
       role: "Bac informatique",
       bio: "Gerer le comportement du captcha",
     },
@@ -58,9 +54,9 @@ export default function Home() {
         </p>
 
         <div className="actions">
-          <button className="cta" onClick={ouvrirCapchat}>
+          <a className="cta" href="/capchat">
             Accéder au site
-          </button>
+          </a>
           <a
             className="github"
             href="https://github.com/Eloik-dev/shacks-2025"
