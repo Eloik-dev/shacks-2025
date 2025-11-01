@@ -295,7 +295,7 @@ const Comet: React.FC = () => {
         style={{ width, height, position: 'relative', background: '#000', color: '#fff', overflow: 'hidden', borderRadius: 12, border: '1px solid rgba(255,255,255,0.04)', boxShadow: '0 12px 40px rgba(0,0,0,0.6)' }}
       >
         {/* center ship (original simple emoji rocket) */}
-        <div style={{ position: "absolute", left: '50%', top: '50%', width: shipR * 2, height: shipR * 2, borderRadius: "50%", background: "linear-gradient(135deg,#eee,#ccc)", display: "flex", alignItems: "center", justifyContent: "center", color: "#001", transform: 'translate(-50%,-50%)', pointerEvents: 'none', fontSize: shipR * 1.8, lineHeight: 1 }}>
+        <div style={{ position: "absolute", left: '50%', top: '50%', width: shipR * 2, height: shipR * 2, borderRadius: "50%", background: "linear-gradient(135deg,#eee,#ccc)", display: "flex", alignItems: "center", justifyContent: "center", color: "#001", transform: 'translate(-50%,-50%)', pointerEvents: 'none', fontSize: shipR * 1.8, lineHeight: 1, userSelect: 'none' }}>
           🚀
         </div>
 
