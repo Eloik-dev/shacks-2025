@@ -24,7 +24,7 @@ const MinigamesContext = createContext<IMinigamesContext>({
 });
 
 const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
-    const [currentDescription, setCurrentDescription] = useState('Veuillez compléter le captcha pour accéder au site');
+    const [currentDescription, setCurrentDescription] = useState('');
     const [currentLevel, setCurrentLevel] = useState(0);
     const [capchaSolved, setCapchaSolved] = useState(false);
     const [levelCount, setLevelCount] = useState(levels.length);
