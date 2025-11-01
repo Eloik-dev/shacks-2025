@@ -55,7 +55,7 @@ export default function Home() {
 
         <div className="actions">
           <a className="cta" href="/capchat">
-            Accéder au site
+            Accéder à la démo
           </a>
           <a
             className="github"

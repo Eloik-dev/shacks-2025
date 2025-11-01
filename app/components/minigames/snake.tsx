@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./snake.css";
+import { MinigamesContext } from "~/context/minigames/MinigamesContext";
 
 type Point = { x: number; y: number };
 
@@ -18,6 +19,8 @@ const randomPoint = (exclude: Point[] = []): Point => {
 };
 
 const Snake: React.FC = () => {
+    const { updateDescription, nextLevel } = useContext(MinigamesContext);
+
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [snake, setSnake] = useState<Point[]>([{ x: 8, y: 10 }, { x: 7, y: 10 }, { x: 6, y: 10 }]);
     const [dir, setDir] = useState<Point>({ x: 1, y: 0 });
@@ -29,6 +32,10 @@ const Snake: React.FC = () => {
 
     const dirRef = useRef(dir);
     dirRef.current = dir;
+
+    useEffect(() => {
+        updateDescription("Complétez le Snake pour prouver que vous êtes humain.");
+    }, [updateDescription]);
 
     // handle keyboard
     useEffect(() => {
@@ -72,6 +79,7 @@ const Snake: React.FC = () => {
                         if (ns >= WIN_SCORE) {
                             setGameOver("You win! 🎉");
                             setRunning(false);
+                            nextLevel();
                         }
                         return ns;
                     });

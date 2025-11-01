@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { MinigamesContext } from "~/context/minigames/MinigamesContext";
 
-import unlocked from "~/../public/images/Cadenas_ouvert-removebg-preview.png";
-import locked from "~/../public/images/Cadenas_ferme-removebg-preview.png";
+import unlocked from "~/src/images/Cadenas_ouvert-removebg-preview.png";
+import locked from "~/src/images/Cadenas_ferme-removebg-preview.png";
 
 // Targets
 const randomPositionTarget = 10;
