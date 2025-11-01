@@ -6,7 +6,7 @@ import { MinigamesProvider } from "~/context/minigames/MinigamesContext";
 
 const Capcha = () => {
     return (
-        <MinigamesProvider levels={[<Comet />]} />
+        <MinigamesProvider levels={[<Tictacto/>,<Comet/>,<Clicker/>]} />
     );
 }
 
