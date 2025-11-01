@@ -2,7 +2,7 @@ import { useContext, type ReactElement } from "react";
 import { MinigamesContext } from "~/context/minigames/MinigamesContext";
 
 const CaptchaWrapper = ({ children }: { children: ReactElement }) => {
-    const { currentDescription } = useContext(MinigamesContext);
+    const { levelCount, currentLevel, currentDescription } = useContext(MinigamesContext);
 
     return (
         <div className="flex items-center justify-center h-screen">
@@ -12,9 +12,10 @@ const CaptchaWrapper = ({ children }: { children: ReactElement }) => {
                     <div className="text-sm font-medium text-gray-700">
                         {currentDescription}
                     </div>
-                    <button className="text-xs text-blue-600 hover:underline">
-                        Refresh
-                    </button>
+                    
+                    <div className="text-sm font-medium text-gray-700">
+                        {currentLevel + 1} / {levelCount}
+                    </div>
                 </div>
 
                 {/* Content area where your children go */}
