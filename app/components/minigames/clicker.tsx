@@ -32,7 +32,7 @@ const Clicker = () => {
     // Countdown timer
     useEffect(() => {
         if (timer <= 0) {
-            reset();
+            nextLevel();
             return;
         }
 
@@ -71,16 +71,9 @@ const Clicker = () => {
 
         if (newCount >= victoryTarget) {
             nextLevel();
+            updateHumanPercentage((newCount * 100) / victoryTarget, 20);
         }
     };
-
-    const reset = () => {
-        setCount(0);
-        setRandomX(0);
-        setRandomY(0);
-        setTimer(30);
-        setShowRestart(true);
-    }
 
     const isUnlocked = count >= victoryTarget;
 
@@ -92,7 +85,7 @@ const Clicker = () => {
             </div>
 
             {/* Clickable lock */}
-            <div className="flex items-center justify-center h-150 select-none">
+            <div className="flex items-center justify-center h-100 select-none">
                 <button
                     onClick={handleClick}
                     disabled={isUnlocked || showRestart}
