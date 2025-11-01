@@ -31,7 +31,7 @@ export default function Home() {
     {
       name: "Léanne Héroux",
       role: "Bac en génie informatique",
-      bio: "Développeur de l'étape Tictacto",
+      bio: "Développeur de l'étape Tictacto et Astéroïdes",
     },
   ];
 
