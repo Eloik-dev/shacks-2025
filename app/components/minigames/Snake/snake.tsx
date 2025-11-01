@@ -5,7 +5,7 @@ import { useGlobalContext } from "~/context/GlobalContext";
 
 type Point = { x: number; y: number };
 
-const GRID_SIZE = 10; // number of cells per row/col
+const GRID_SIZE = 20; // number of cells per row/col
 const CELL_SIZE = 24; // pixels per cell (bigger so snake is clearly visible)
 const CANVAS_SIZE = GRID_SIZE * CELL_SIZE;
 const TICK_INITIAL = 120; // ms per move
@@ -30,7 +30,6 @@ const Snake: React.FC = () => {
     const [score, setScore] = useState(0);
     const [tickMs, setTickMs] = useState(TICK_INITIAL);
     const [running, setRunning] = useState(true);
-    const [gameOver, setGameOver] = useState<string | null>(null);
 
     const dirRef = useRef(dir);
     dirRef.current = dir;
@@ -59,7 +58,6 @@ const Snake: React.FC = () => {
 
     // main game loop
     useEffect(() => {
-        if (gameOver) return;
         const id = setInterval(() => {
             if (!running) return;
             setSnake(prev => {
@@ -68,28 +66,23 @@ const Snake: React.FC = () => {
 
                 // self collision
                 if (prev.some(p => p.x === nextHead.x && p.y === nextHead.y)) {
-                    setGameOver("Hit your tail! Game Over");
-                    setRunning(false);
+                    updateHumanPercentage(((score * 100) / WIN_SCORE), 20);
+                    nextLevel();
                     return prev;
                 }
 
                 let grew = false;
-                // collect orb
                 if (nextHead.x === orb.x && nextHead.y === orb.y) {
                     setScore(s => {
                         const ns = s + ORB_SCORE;
                         if (ns >= WIN_SCORE) {
-                            setGameOver("You win! 🎉");
-                            setRunning(false);
+                            updateHumanPercentage(((score * 100) / WIN_SCORE), 20);
                             nextLevel();
                         }
                         return ns;
                     });
-                    // grow: keep tail
                     grew = true;
-                    // place new orb avoiding snake including new head
                     setOrb(prevOrb => randomPoint([nextHead, ...prev]));
-                    // speed up slightly
                     setTickMs(ms => Math.max(40, Math.floor(ms * 0.98)));
                 }
 
@@ -99,7 +92,7 @@ const Snake: React.FC = () => {
             });
         }, tickMs);
         return () => clearInterval(id);
-    }, [running, tickMs, orb, gameOver]);
+    }, [running, tickMs, orb]);
 
     // draw
     useEffect(() => {
@@ -147,7 +140,6 @@ const Snake: React.FC = () => {
         setScore(0);
         setTickMs(TICK_INITIAL);
         setRunning(true);
-        setGameOver(null);
     };
 
     return (
@@ -156,27 +148,7 @@ const Snake: React.FC = () => {
                 <canvas ref={canvasRef} width={CANVAS_SIZE} height={CANVAS_SIZE} className="snake-canvas" />
                 <div style={{ marginTop: 8, textAlign: "center" }}>
                     <div className="snake-score">Score: {score} / {WIN_SCORE}</div>
-                    <div className="snake-small">Orb = {ORB_SCORE}pts · Speed: {Math.round(1000 / tickMs)} moves/sec</div>
-                    <div style={{ marginTop: 8 }} className="snake-controls">
-                        <button onClick={() => setRunning(r => !r)} style={{ marginRight: 8 }}>{running ? "Pause" : "Resume"}</button>
-                        <button onClick={reset}>Restart</button>
-                    </div>
                 </div>
-            </div>
-
-            <div className="snake-info">
-                <h2>Snake Minigame</h2>
-                <p>Collect the glowing orb. Each orb gives <strong>{ORB_SCORE}</strong> points. Reach <strong>{WIN_SCORE}</strong> points to win.</p>
-                <p>Controls: Arrow keys or WASD to move. Space to pause/resume.</p>
-                <p>Don't run into your tail — doing so ends the game. The arena wraps around the edges.</p>
-                {gameOver && (
-                    <div className="game-over">
-                        <strong style={{ fontSize: 16 }}>{gameOver}</strong>
-                        <div style={{ marginTop: 8 }}>
-                            <button onClick={reset}>Play again</button>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     );

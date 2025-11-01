@@ -33,7 +33,7 @@ const Jeopardy = () => {
   // shuffle options à chaque nouvelle question
   useEffect(() => {
     setShuffledOptions(shuffleArray(questions[currentIndex].options));
-    setTimer(10); // reset timer pour chaque question
+    setTimer(10);
   }, [currentIndex, questions]);
 
   // gestion du timer
