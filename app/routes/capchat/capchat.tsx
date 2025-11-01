@@ -1,6 +1,5 @@
 import Minigames from "~/containers/minigames/clicker/minigames";
-import type { Route } from "./+types/home";
-import styles from './style.css';
+import type { Route } from "../+types/home";
 
 export function meta({}: Route.MetaArgs) {
   return [

@@ -1,10 +1,9 @@
 import Tictacto from "~/components/minigames/tictacto";
+import { MinigamesProvider } from "~/context/minigames/MinigamesContext";
 
 const Minigames = () => {
     return (
-        <>
-            <Tictacto/>
-        </>
+        <MinigamesProvider levels={[<Tictacto />]} />
     );
 }
 
