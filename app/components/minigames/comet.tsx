@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { MinigamesContext } from "~/context/minigames/MinigamesContext";
+import { useGlobalContext } from "~/context/GlobalContext";
+import { useMinigamesContext } from "~/context/MinigamesContext";
 
 type Ast = {
   id: number;
@@ -23,7 +24,8 @@ const GAME_W = 800;
 const GAME_H = 600;
 
 const Comet: React.FC = () => {
-  const { nextLevel, updateDescription } = React.useContext(MinigamesContext);
+  const { updateHumanPercentage } = useGlobalContext();
+  const { nextLevel, updateDescription } = useMinigamesContext();
 
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = React.useState<number>(GAME_W);

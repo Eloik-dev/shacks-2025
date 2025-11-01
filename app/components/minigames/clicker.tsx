@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { MinigamesContext } from "~/context/minigames/MinigamesContext";
+import { useEffect, useState } from "react";
 
 import unlocked from "~/src/images/Cadenas_ouvert-removebg-preview.png";
 import locked from "~/src/images/Cadenas_ferme-removebg-preview.png";
+import { useMinigamesContext } from "~/context/MinigamesContext";
+import { useGlobalContext } from "~/context/GlobalContext";
 
 // Targets
 const randomPositionTarget = 10;
@@ -16,7 +17,8 @@ const offsetY = -30;
 const moveSpeed = 300;
 
 const Clicker = () => {
-    const { updateDescription, nextLevel } = useContext(MinigamesContext);
+    const { updateHumanPercentage } = useGlobalContext();
+    const { updateDescription, nextLevel } = useMinigamesContext();
     const [count, setCount] = useState(0);
     const [randomX, setRandomX] = useState(0);
     const [randomY, setRandomY] = useState(0);

@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from "react";
-import { MinigamesContext } from "~/context/minigames/MinigamesContext";
+import React, { useEffect } from "react";
+import { useGlobalContext } from "~/context/GlobalContext";
+import { useMinigamesContext } from "~/context/MinigamesContext";
 
 type Cell = "X" | "O" | null;
 
@@ -17,7 +18,8 @@ const WIN_LINES = [
 const initialBoard: Cell[] = Array(9).fill(null);
 
 const Tictacto: React.FC = () => {
-    const { updateDescription, nextLevel } = useContext(MinigamesContext);
+    const { updateHumanPercentage } = useGlobalContext();
+    const { updateDescription, nextLevel } = useMinigamesContext();
 
     const [board, setBoard] = React.useState<Cell[]>(initialBoard);
     const [message, setMessage] = React.useState<string>(

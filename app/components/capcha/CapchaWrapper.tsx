@@ -1,8 +1,8 @@
-import { useContext, useMemo, type ReactElement } from "react";
-import { MinigamesContext } from "~/context/minigames/MinigamesContext";
+import { useMemo, type ReactElement } from "react";
+import { useMinigamesContext } from "~/context/MinigamesContext";
 
 const CaptchaWrapper = ({ children }: { children: ReactElement }) => {
-    const { levelCount, currentLevel, currentDescription } = useContext(MinigamesContext);
+    const { levelCount, currentLevel, currentDescription } = useMinigamesContext();
 
     const progress = useMemo(() => {
         return ((currentLevel) / levelCount);
