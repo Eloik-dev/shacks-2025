@@ -16,7 +16,7 @@ const offsetY = -30;
 const moveSpeed = 300;
 
 const Clicker = () => {
-    const { updateDescription, resetCapcha, nextLevel } = useContext(MinigamesContext);
+    const { updateDescription, nextLevel } = useContext(MinigamesContext);
     const [count, setCount] = useState(0);
     const [randomX, setRandomX] = useState(0);
     const [randomY, setRandomY] = useState(0);
@@ -30,7 +30,7 @@ const Clicker = () => {
     // Countdown timer
     useEffect(() => {
         if (timer <= 0) {
-            resetCapcha();
+            reset();
             return;
         }
 
@@ -39,7 +39,7 @@ const Clicker = () => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [timer, resetCapcha]);
+    }, [timer]);
 
     // Moving target logic
     useEffect(() => {
@@ -71,6 +71,14 @@ const Clicker = () => {
             nextLevel();
         }
     };
+
+    const reset = () => {
+        setCount(0);
+        setRandomX(0);
+        setRandomY(0);
+        setTimer(30);
+        setShowRestart(true);
+    }
 
     const isUnlocked = count >= victoryTarget;
 
