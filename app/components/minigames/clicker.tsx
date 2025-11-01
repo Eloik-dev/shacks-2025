@@ -13,7 +13,7 @@ const victoryTarget = 30;
 const offsetY = -30;
 
 // Clicker Minigame Component
-const moveSpeed = 100;
+const moveSpeed = 300;
 
 const Clicker = () => {
     const { updateDescription, resetCapcha, nextLevel } = useContext(MinigamesContext);
