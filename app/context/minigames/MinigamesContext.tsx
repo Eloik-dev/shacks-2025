@@ -9,7 +9,6 @@ interface IMinigamesContext {
     nextLevel: () => void;
     capchaSolved: boolean;
     setCapchaSolved: (solved: boolean) => void;
-    resetCapcha: () => void;
     levelCount: number;
     victory: boolean;
 };
@@ -21,7 +20,6 @@ const MinigamesContext = createContext<IMinigamesContext>({
     nextLevel: () => { },
     capchaSolved: false,
     setCapchaSolved: () => { },
-    resetCapcha: () => { },
     levelCount: 0,
     victory: false,
 });
@@ -59,11 +57,6 @@ const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
         }, 1000);
     };
 
-    const resetCapcha = () => {
-        setCapchaSolved(false);
-        setVictory(false);
-    };
-
     return (
         <MinigamesContext.Provider value={{
             currentDescription,
@@ -72,7 +65,6 @@ const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
             nextLevel,
             capchaSolved,
             setCapchaSolved,
-            resetCapcha,
             levelCount,
             victory,
         }}>
