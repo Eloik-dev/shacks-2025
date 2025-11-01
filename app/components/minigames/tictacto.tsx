@@ -411,68 +411,31 @@ const Tictacto: React.FC = () => {
 
     function getStrikeStyle(line: number[]) {
         if (!line) return { display: "none" } as React.CSSProperties;
-        const [a, , c] = line;
-        // determine if horizontal, vertical or diagonal
-        // horizontal lines: [0,1,2], [3,4,5], [6,7,8]
-        if (line[0] % 3 === 0 && line[1] % 3 === 1 && line[2] % 3 === 2) {
-            // horizontal
-            const row = Math.floor(line[0] / 3);
-            const top = row * (CELL_SIZE + GAP) + CELL_SIZE / 2 - STRIKE_THICK / 2;
-            return {
-                position: "absolute",
-                left: 0,
-                top,
-                width: TOTAL,
-                height: STRIKE_THICK,
-                background: "#00ffcc",
-                borderRadius: STRIKE_THICK / 2,
-                transform: "none",
-                zIndex: 2,
-            } as React.CSSProperties;
-        }
-        // vertical lines: [0,3,6], [1,4,7], [2,5,8]
-        if (line[0] < 3 && line[1] < 6 && line[2] < 9 && line[1] - line[0] === 3) {
-            const col = line[0] % 3;
-            const left = col * (CELL_SIZE + GAP) + CELL_SIZE / 2 - STRIKE_THICK / 2;
-            return {
-                position: "absolute",
-                left,
-                top: 0,
-                width: STRIKE_THICK,
-                height: TOTAL,
-                background: "#00ffcc",
-                borderRadius: STRIKE_THICK / 2,
-                zIndex: 2,
-            } as React.CSSProperties;
-        }
-        // diagonals
-        if (line[0] === 0 && line[1] === 4 && line[2] === 8) {
-            return {
-                position: "absolute",
-                left: (TOTAL - TOTAL * 1.05) / 2,
-                top: TOTAL / 2 - STRIKE_THICK / 2,
-                width: TOTAL * 1.05,
-                height: STRIKE_THICK,
-                background: "#ffe66d",
-                transform: "rotate(45deg)",
-                transformOrigin: "center",
-                zIndex: 2,
-            } as React.CSSProperties;
-        }
-        if (line[0] === 2 && line[1] === 4 && line[2] === 6) {
-            return {
-                position: "absolute",
-                left: (TOTAL - TOTAL * 1.05) / 2,
-                top: TOTAL / 2 - STRIKE_THICK / 2,
-                width: TOTAL * 1.05,
-                height: STRIKE_THICK,
-                background: "#ffe66d",
-                transform: "rotate(-45deg)",
-                transformOrigin: "center",
-                zIndex: 2,
-            } as React.CSSProperties;
-        }
-        return { display: "none" } as React.CSSProperties;
+        // compute center positions of the first and last cell in the line
+        const p = (i: number) => ({
+            x: (i % 3) * (CELL_SIZE + GAP) + CELL_SIZE / 2,
+            y: Math.floor(i / 3) * (CELL_SIZE + GAP) + CELL_SIZE / 2,
+        });
+        const p1 = p(line[0]);
+        const p3 = p(line[2]);
+        const dx = p3.x - p1.x;
+        const dy = p3.y - p1.y;
+        const length = Math.sqrt(dx * dx + dy * dy);
+        const midX = p1.x + dx / 2;
+        const midY = p1.y + dy / 2;
+        const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+        return {
+            position: 'absolute',
+            left: `${midX - length / 2}px`,
+            top: `${midY - STRIKE_THICK / 2}px`,
+            width: `${length}px`,
+            height: STRIKE_THICK,
+            background: '#ffe66d',
+            transform: `rotate(${angle}deg)`,
+            transformOrigin: 'center',
+            borderRadius: STRIKE_THICK / 2,
+            zIndex: 2,
+        } as React.CSSProperties;
     }
 
     return (
