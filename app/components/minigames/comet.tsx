@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MinigamesContext } from "~/context/minigames/MinigamesContext";
 
 type Ast = {
@@ -23,7 +23,7 @@ const GAME_W = 800;
 const GAME_H = 600;
 
 const Comet: React.FC = () => {
-    const { nextLevel } = React.useContext(MinigamesContext);
+  const { nextLevel, updateDescription } = React.useContext(MinigamesContext);
 
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = React.useState<number>(GAME_W);
@@ -48,6 +48,10 @@ const Comet: React.FC = () => {
   const [message, setMessage] = React.useState<string>("À vous de jouer — protégez le vaisseau");
   const [ended, setEnded] = React.useState<null | "win" | "lose">(null);
   // no shield angle needed — firing is on click
+
+  useEffect(() => {
+    updateDescription("Protégez le vaisseau spatial pour prouver que vous êtes humain.");
+  }, [updateDescription]);
 
   // fixed game area size (center coordinates are relative to the container)
   React.useEffect(() => {
@@ -290,57 +294,57 @@ const Comet: React.FC = () => {
         }}
         style={{ width, height, position: 'relative', background: '#000', color: '#fff', overflow: 'hidden', borderRadius: 12, border: '1px solid rgba(255,255,255,0.04)', boxShadow: '0 12px 40px rgba(0,0,0,0.6)' }}
       >
-      {/* center ship (original simple emoji rocket) */}
-      <div style={{ position: "absolute", left: '50%', top: '50%', width: shipR * 2, height: shipR * 2, borderRadius: "50%", background: "linear-gradient(135deg,#eee,#ccc)", display: "flex", alignItems: "center", justifyContent: "center", color: "#001", transform: 'translate(-50%,-50%)', pointerEvents: 'none', fontSize: shipR * 1.8, lineHeight: 1 }}>
-        🚀
-      </div>
+        {/* center ship (original simple emoji rocket) */}
+        <div style={{ position: "absolute", left: '50%', top: '50%', width: shipR * 2, height: shipR * 2, borderRadius: "50%", background: "linear-gradient(135deg,#eee,#ccc)", display: "flex", alignItems: "center", justifyContent: "center", color: "#001", transform: 'translate(-50%,-50%)', pointerEvents: 'none', fontSize: shipR * 1.8, lineHeight: 1 }}>
+          🚀
+        </div>
 
-      {/* no shield visual */}
+        {/* no shield visual */}
 
-      {/* asteroids */}
-      {asteroids.map((a) =>
-        a.alive && a.started ? (
-          <svg
-            key={a.id}
-            onClick={(ev) => {
-              // stop propagation so the container click doesn't also fire
-              ev.stopPropagation();
-              shootAt(a.x, a.y);
-            }}
-            style={{ position: 'absolute', left: a.x - a.r, top: a.y - a.r, width: a.r * 2, height: a.r * 2, cursor: 'crosshair', pointerEvents: 'auto' }}
-            viewBox={`${-a.r} ${-a.r} ${a.r * 2} ${a.r * 2}`}
-          >
-            <path d={a.shape} fill="#8b6b4b" stroke="#4a2f1a" strokeWidth={1} />
-          </svg>
-        ) : null
-      )}
-
-      {/* missiles */}
-      {missiles.map((m, i) => (
-        <div key={m.id || i} style={{ position: 'absolute', left: m.x - m.r, top: m.y - m.r, width: m.r * 2, height: m.r * 2, borderRadius: '50%', background: 'linear-gradient(90deg,#fff,#ffd36b)', boxShadow: '0 6px 18px rgba(255,200,80,0.6)', pointerEvents: 'none', transform: 'translateZ(0)', zIndex: 80 }} />
-      ))}
-
-      {/* explosions */}
-      {explosions.map((ex) => {
-        const prog = 1 - Math.max(0, ex.ttl / ex.life);
-        const size = ex.r * (1 + prog * 1.6);
-        const opacity = 1 - prog;
-        return (
-          <div key={ex.id} style={{ position: 'absolute', left: ex.x - size / 2, top: ex.y - size / 2, width: size, height: size, borderRadius: '50%', background: `radial-gradient(circle at 30% 30%, rgba(255,255,200,${0.9 * opacity}), rgba(255,140,40,${0.6 * opacity}), rgba(200,60,20,${0.2 * opacity}))`, pointerEvents: 'none', filter: `blur(${4 * prog}px)`, transform: `scale(${1})`, zIndex: 90 }} />
-        );
-      })}
-
-      {/* HUD / message */}
-      <div style={{ position: "absolute", left: 12, top: 12, zIndex: 50, pointerEvents: 'none' }}>
-        <div style={{ fontSize: 18, fontWeight: 700 }}>{message}</div>
-        {ended && (
-          <div style={{ marginTop: 12 }}>
-            <button onClick={restart} style={{ padding: "8px 12px", borderRadius: 8, fontWeight: 800, pointerEvents: 'auto' }}>
-              Recommencer
-            </button>
-          </div>
+        {/* asteroids */}
+        {asteroids.map((a) =>
+          a.alive && a.started ? (
+            <svg
+              key={a.id}
+              onClick={(ev) => {
+                // stop propagation so the container click doesn't also fire
+                ev.stopPropagation();
+                shootAt(a.x, a.y);
+              }}
+              style={{ position: 'absolute', left: a.x - a.r, top: a.y - a.r, width: a.r * 2, height: a.r * 2, cursor: 'crosshair', pointerEvents: 'auto' }}
+              viewBox={`${-a.r} ${-a.r} ${a.r * 2} ${a.r * 2}`}
+            >
+              <path d={a.shape} fill="#8b6b4b" stroke="#4a2f1a" strokeWidth={1} />
+            </svg>
+          ) : null
         )}
-      </div>
+
+        {/* missiles */}
+        {missiles.map((m, i) => (
+          <div key={m.id || i} style={{ position: 'absolute', left: m.x - m.r, top: m.y - m.r, width: m.r * 2, height: m.r * 2, borderRadius: '50%', background: 'linear-gradient(90deg,#fff,#ffd36b)', boxShadow: '0 6px 18px rgba(255,200,80,0.6)', pointerEvents: 'none', transform: 'translateZ(0)', zIndex: 80 }} />
+        ))}
+
+        {/* explosions */}
+        {explosions.map((ex) => {
+          const prog = 1 - Math.max(0, ex.ttl / ex.life);
+          const size = ex.r * (1 + prog * 1.6);
+          const opacity = 1 - prog;
+          return (
+            <div key={ex.id} style={{ position: 'absolute', left: ex.x - size / 2, top: ex.y - size / 2, width: size, height: size, borderRadius: '50%', background: `radial-gradient(circle at 30% 30%, rgba(255,255,200,${0.9 * opacity}), rgba(255,140,40,${0.6 * opacity}), rgba(200,60,20,${0.2 * opacity}))`, pointerEvents: 'none', filter: `blur(${4 * prog}px)`, transform: `scale(${1})`, zIndex: 90 }} />
+          );
+        })}
+
+        {/* HUD / message */}
+        <div style={{ position: "absolute", left: 12, top: 12, zIndex: 50, pointerEvents: 'none' }}>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>{message}</div>
+          {ended && (
+            <div style={{ marginTop: 12 }}>
+              <button onClick={restart} style={{ padding: "8px 12px", borderRadius: 8, fontWeight: 800, pointerEvents: 'auto' }}>
+                Recommencer
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

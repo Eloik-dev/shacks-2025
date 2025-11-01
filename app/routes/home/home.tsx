@@ -3,10 +3,10 @@ import type { Route } from "./+types/home";
 
 export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "CaptGame — Hack" },
+    { title: "CaptGame - Hack" },
     {
       name: "description",
-      content: "Présentation du hack Capchat — un captcha innovant.",
+      content: "Présentation du hack Capchat - un captcha innovant.",
     },
   ];
 }
