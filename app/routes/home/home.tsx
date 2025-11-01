@@ -49,8 +49,8 @@ export default function Home() {
         <h1 className="title">CaptGame — le captcha réinventé</h1>
 
         <p className="lead">
-          Voici notre 'Hack' un Capchat innovant, très sécurisé contre les IA,
-          offrant une expérience utilisateur unique.
+          Voici notre 'Hack', c'est un Capchat innovant qui est très sécurisé contre les IA
+          et offre une expérience utilisateur unique.
         </p>
 
         <div className="actions">
