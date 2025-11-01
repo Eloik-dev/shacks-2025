@@ -4,6 +4,7 @@ import CaptchaWrapper from "~/components/capcha/CapchaWrapper";
 interface IMinigamesContext {
     currentDescription: string;
     updateDescription: (description: string) => void;
+    currentLevel: number;
     nextLevel: () => void;
     capchaSolved: boolean;
     setCapchaSolved: (solved: boolean) => void;
@@ -15,6 +16,7 @@ interface IMinigamesContext {
 const MinigamesContext = createContext<IMinigamesContext>({
     currentDescription: '',
     updateDescription: () => { },
+    currentLevel: 0,
     nextLevel: () => { },
     capchaSolved: false,
     setCapchaSolved: () => { },
@@ -61,6 +63,7 @@ const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
         <MinigamesContext.Provider value={{
             currentDescription,
             updateDescription,
+            currentLevel,
             nextLevel,
             capchaSolved,
             setCapchaSolved,
