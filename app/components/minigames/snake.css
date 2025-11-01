@@ -33,6 +33,7 @@
   border-radius:6px;
   cursor:pointer;
 }
+
 .snake-score{ font-weight:700; color:var(--accent-2); }
 .snake-small{ color:var(--muted); font-size:12px }
 .game-over{ margin-top:10px; background: linear-gradient(90deg,#1b2330,#111827); padding:8px; border-radius:6px; }

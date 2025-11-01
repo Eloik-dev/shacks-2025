@@ -1,0 +1,431 @@
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --accent: #7dd3fc;
+  --muted: #94a3b8;
+  --binary-default: rgba(255, 255, 255, 0.06);
+  --binary-dark: rgba(0, 0, 0, 0.06);
+  --binary-active: #7cfc00;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-family: 'Varela', sans-serif;
+  color: var(--muted);
+  background: linear-gradient(180deg, #071224 0%, #081428 100%);
+}
+
+/* Overlay binaire global pour '0101' partout sur le site */
+body::before {
+  content: none;
+  display: none;
+}
+
+.home-container {
+  width: 1200px;
+  margin: 48px auto;
+  padding: 24px;
+}
+.hero {
+  padding: 28px 20px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+}
+.hero {
+  position: relative;
+  z-index: 1;
+}
+
+.hero::before {
+  content: none;
+  display: none;
+}
+.title {
+  color: var(--accent);
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+.lead {
+  margin: 0 0 18px;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.cta {
+  background: linear-gradient(90deg, #0284c7, #7dd3fc);
+  color: #001219;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.cta:focus {
+  outline: 2px solid rgba(125, 211, 252, 0.3);
+}
+
+/* petit effet binaire sur le bouton */
+.cta::after {
+  content: "010010010010010010010010";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--binary-default);
+  letter-spacing: 2px;
+  transition:
+    transform 0.35s ease,
+    color 0.25s ease,
+    opacity 0.25s ease;
+  opacity: 0.9;
+}
+.cta:hover::after {
+  transform: translateY(-50%) translateX(-6px);
+  color: var(--binary-active);
+  opacity: 1;
+}
+
+.github {
+  color: var(--muted);
+  text-decoration: underline;
+  font-size: 0.95rem;
+}
+
+.team {
+  margin-top: 28px;
+}
+.team h2 {
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.member-card {
+  position: relative;
+  z-index: 0; /* stacking for its background pseudo */
+  padding: 18px;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.02)
+  );
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* effet binaire 010 en fond via ::before */
+.member-card::before {
+  content: none;
+  display: none;
+}
+.member-card:hover::before {
+  opacity: 0.18;
+  transform: translateX(0);
+  color: var(--binary-active);
+}
+
+.member-info {
+  position: relative;
+  z-index: 1;
+}
+.member-card {
+  color: #e6f7ff;
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+
+/* specific styling for member name so the glitch overlay aligns correctly */
+.member-name {
+  margin: 0 0 6px;
+  color: #e6f7ff;
+  font-size: 1.1rem;
+}
+
+/* ensure the glitch variant for member names behaves as expected */
+.member-name.glitch {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  color: #e6f7ff;
+  font-weight: 700;
+}
+
+/* Glitch border effect on hover for team member names (tight to the name only) */
+.member-card {
+  position: relative;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.member-card::before,
+.member-card::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  right: -8px;
+  bottom: -6px;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  z-index: 3;
+}
+.member-card::before {
+  border: 2px solid #00ffe1;
+}
+.member-card::after {
+  border: 2px solid #ff4da6;
+}
+.member-card:hover::before,
+.member-card:hover::after {
+  opacity: 1;
+  animation: glitch-border 0.6s steps(4, end) infinite;
+}
+
+@keyframes glitch-border {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(2px, -1px); }
+  50% { transform: translate(-1px, 2px); }
+  75% { transform: translate(1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+.member-role {
+  color: var(--accent);
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+}
+.member-bio {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+/* petit effet au survol de la carte */
+.member-card:hover {
+  transform: translateY(-6px);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  .cta::after {
+    display: none;
+  }
+}
+
+/* ------------------------- */
+/* Glitch text effect (pure CSS, no Sass) */
+/* Applies to elements with .glitch and data-text attribute */
+.glitch {
+  position: relative;
+  color: #fff;
+  display: inline-block;
+  z-index: 2;
+}
+.glitch[data-text] {
+  font-weight: 700;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.glitch::before {
+  left: -2px;
+  color: #00ffe1;
+  opacity: 0.95;
+  text-shadow: -2px 0 #00b3a7;
+  clip: rect(0, 9999px, 9999px, 0);
+  animation: glitch-anim 6s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: 2px;
+  color: #ff4da6;
+  opacity: 0.95;
+  text-shadow: 2px 0 #c6006b;
+  clip: rect(0, 9999px, 9999px, 0);
+  animation: glitch-anim-2 7s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(2px, 9999px, 40px, 0);
+    transform: translate(0, 0);
+  }
+  10% {
+    clip: rect(10px, 9999px, 60px, 0);
+    transform: translate(-2px, -1px);
+  }
+  20% {
+    clip: rect(20px, 9999px, 40px, 0);
+    transform: translate(2px, 1px);
+  }
+  30% {
+    clip: rect(5px, 9999px, 25px, 0);
+    transform: translate(-1px, 0);
+  }
+  40% {
+    clip: rect(30px, 9999px, 70px, 0);
+    transform: translate(1px, -1px);
+  }
+  50% {
+    clip: rect(12px, 9999px, 45px, 0);
+    transform: translate(-2px, 1px);
+  }
+  60% {
+    clip: rect(22px, 9999px, 55px, 0);
+    transform: translate(2px, 0);
+  }
+  70% {
+    clip: rect(8px, 9999px, 30px, 0);
+    transform: translate(-1px, -1px);
+  }
+  80% {
+    clip: rect(26px, 9999px, 66px, 0);
+    transform: translate(1px, 1px);
+  }
+  90% {
+    clip: rect(14px, 9999px, 44px, 0);
+    transform: translate(-2px, 0);
+  }
+  100% {
+    clip: rect(2px, 9999px, 40px, 0);
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes glitch-anim-2 {
+  0% {
+    clip: rect(12px, 9999px, 52px, 0);
+    transform: translate(0, 0);
+  }
+  8% {
+    clip: rect(6px, 9999px, 30px, 0);
+    transform: translate(2px, 1px);
+  }
+  16% {
+    clip: rect(22px, 9999px, 62px, 0);
+    transform: translate(-2px, -1px);
+  }
+  24% {
+    clip: rect(2px, 9999px, 18px, 0);
+    transform: translate(1px, 0);
+  }
+  32% {
+    clip: rect(30px, 9999px, 70px, 0);
+    transform: translate(-1px, 1px);
+  }
+  40% {
+    clip: rect(10px, 9999px, 40px, 0);
+    transform: translate(2px, 0);
+  }
+  48% {
+    clip: rect(18px, 9999px, 58px, 0);
+    transform: translate(-2px, -1px);
+  }
+  56% {
+    clip: rect(4px, 9999px, 24px, 0);
+    transform: translate(1px, -1px);
+  }
+  64% {
+    clip: rect(26px, 9999px, 66px, 0);
+    transform: translate(-1px, 0);
+  }
+  72% {
+    clip: rect(14px, 9999px, 44px, 0);
+    transform: translate(2px, 1px);
+  }
+  80% {
+    clip: rect(6px, 9999px, 32px, 0);
+    transform: translate(-2px, 0);
+  }
+  88% {
+    clip: rect(20px, 9999px, 60px, 0);
+    transform: translate(1px, -1px);
+  }
+  100% {
+    clip: rect(12px, 9999px, 52px, 0);
+    transform: translate(0, 0);
+  }
+}
+
+/* On hover, intensify the chroma and show also the global binary highlight */
+.glitch:hover::before,
+.glitch:hover::after {
+  opacity: 1;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+}
+ body {
+    margin: 0;
+    height: 100vh;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: monospace;
+    color: #0f0;
+  }
+
+  .hacker-text {
+    font-size: 2rem;
+    line-height: 1.5;
+    white-space: pre;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+  }
+
+  /* Hover effect */
+  .hacker-text:hover {
+    color: #ff0;
+    transform: scale(1.2);
+  }
+
+  /* Generate random 0s and 1s */
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  .digit {
+    display: inline-block;
+    animation: flicker 0.5s infinite;
+  }
