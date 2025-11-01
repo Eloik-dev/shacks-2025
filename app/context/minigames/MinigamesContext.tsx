@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState, type ReactElement } from "react";
+import { redirect, useNavigate } from "react-router";
 import CaptchaWrapper from "~/components/capcha/CapchaWrapper";
 
 interface IMinigamesContext {
@@ -26,6 +27,7 @@ const MinigamesContext = createContext<IMinigamesContext>({
 });
 
 const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
+    const navigate = useNavigate();
     const [currentDescription, setCurrentDescription] = useState('');
     const [currentLevel, setCurrentLevel] = useState(0);
     const [capchaSolved, setCapchaSolved] = useState(false);
@@ -42,13 +44,16 @@ const MinigamesProvider = ({ levels }: { levels: ReactElement[] }) => {
 
     const nextLevel = () => {
         setVictory(true);
+        console.log('Current Level:', currentLevel, 'of', levels.length);
+        if (currentLevel + 1 >= levels.length) {
+            setCapchaSolved(true);
+            navigate('/learn');
+            return;
+        }
+
         setTimeout(() => {
-            if (currentLevel < levels.length) {
-                setCurrentLevel(currentLevel + 1);
-                setCapchaSolved(false);
-            } else {
-                setCapchaSolved(true);
-            }
+            setCurrentLevel(currentLevel + 1);
+            setCapchaSolved(false);
 
             setVictory(false);
         }, 1000);
