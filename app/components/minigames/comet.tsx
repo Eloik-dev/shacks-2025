@@ -48,7 +48,6 @@ const Comet: React.FC = () => {
   const lastRef = React.useRef<number | null>(null);
   const [running, setRunning] = React.useState<boolean>(true);
   const [message, setMessage] = React.useState<string>("À vous de jouer — protégez le vaisseau");
-  const [ended, setEnded] = React.useState<null | "win" | "lose">(null);
   // no shield angle needed — firing is on click
 
   useEffect(() => {
@@ -102,7 +101,6 @@ const Comet: React.FC = () => {
     astRef.current = arr;
     setAsteroids([...arr]);
     setRunning(true);
-    setEnded(null);
     setMessage("À vous de jouer — protégez le vaisseau");
     lastRef.current = null;
   }, []);
@@ -113,7 +111,7 @@ const Comet: React.FC = () => {
       if (!lastRef.current) lastRef.current = ts;
       const dt = Math.min(40, ts - lastRef.current) / 1000; // seconds, clamp
       lastRef.current = ts;
-      if (running && ended === null) {
+      if (running) {
         const a = astRef.current.map((ast) => {
           if (!ast.alive) return ast;
           // not started yet -> wait until its startAt
@@ -146,13 +144,13 @@ const Comet: React.FC = () => {
           // check ship collision
           if (dist <= shipR + ast.r) {
             // hit ship -> lose
-            setEnded("lose");
-            setMessage("PERDANT");
+            updateHumanPercentage((astRef.current.filter(ast => !ast.alive).length * 100) / NUM_AST, 10);
+            nextLevel();
             return { ...ast, x: nx, y: ny, alive: false, hitShip: true, started };
           }
 
           return { ...ast, x: nx, y: ny, vx, vy, started };
-        });
+      });
         // (no automatic firing here; missiles spawn from click handler)
         astRef.current = a;
         setAsteroids(a);
@@ -209,9 +207,9 @@ const Comet: React.FC = () => {
 
         // if all asteroids are dead (blocked) -> win
         if (a.every((s) => !s.alive)) {
-          setEnded("win");
           setMessage("🎉 Succès — vous avez protégé le vaisseau !");
           setRunning(false);
+          updateHumanPercentage(100, 20);
           nextLevel();
           return;
         }
@@ -223,7 +221,7 @@ const Comet: React.FC = () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [running, ended]);
+  }, [running]);
 
   // clicking will fire from the ship; no pointer tracking needed
 
@@ -239,48 +237,6 @@ const Comet: React.FC = () => {
     const m = { id: Math.random(), x: cx, y: cy, vx, vy, r: MISSILE_R, ttl: MISSILE_TTL, alive: true };
     missilesRef.current.push(m);
     setMissiles(missilesRef.current.slice());
-  }
-
-  function restart() {
-    const arr: Ast[] = [];
-    const spawnBase = Math.max(GAME_W, GAME_H) * 0.9;
-    const cx0 = center.current.x || GAME_W / 2;
-    const cy0 = center.current.y || GAME_H / 2;
-    const now = performance.now();
-    const spawnBase2 = spawnBase;
-    for (let i = 0; i < NUM_AST; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const spawnDist = spawnBase2 + Math.random() * 200;
-      const cx = cx0 + Math.cos(angle) * spawnDist;
-      const cy = cy0 + Math.sin(angle) * spawnDist;
-      const dx = cx0 - cx;
-      const dy = cy0 - cy;
-      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-      const baseSpeed = 60 + Math.random() * 140; // px/sec
-      const delay = i * 220 + Math.random() * 300;
-      const startAt = now + delay;
-      const vx = (dx / dist) * baseSpeed;
-      const vy = (dy / dist) * baseSpeed;
-      // jagged shape and radius
-      const rad = 8 + Math.random() * 12;
-      const pts = 7 + Math.floor(Math.random() * 3);
-      const segs: string[] = [];
-      for (let p = 0; p < pts; p++) {
-        const aa = (p / pts) * Math.PI * 2;
-        const rr = (Math.random() * 0.4 + 0.8) * rad;
-        const px = Math.cos(aa) * rr;
-        const py = Math.sin(aa) * rr;
-        segs.push(`${px},${py}`);
-      }
-      const shape = `M ${segs.join(" L ")} Z`;
-      arr.push({ id: i, x: cx, y: cy, vx, vy, r: rad, alive: true, baseSpeed, startAt, spawnDist, started: false, targeted: false, shape });
-    }
-    astRef.current = arr;
-    setAsteroids([...arr]);
-    setRunning(true);
-    setEnded(null);
-    setMessage("À vous de jouer — protégez le vaisseau");
-    lastRef.current = null;
   }
 
   return (
@@ -339,39 +295,10 @@ const Comet: React.FC = () => {
         {/* HUD / message */}
         <div style={{ position: "absolute", left: 12, top: 12, zIndex: 50, pointerEvents: 'none' }}>
           <div style={{ fontSize: 18, fontWeight: 700 }}>{message}</div>
-          {ended && (
-            <div style={{ marginTop: 12 }}>
-              <button onClick={restart} style={{ padding: "8px 12px", borderRadius: 8, fontWeight: 800, pointerEvents: 'auto' }}>
-                Recommencer
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>
   );
 };
 
-// small helpers
-function radToDeg(r: number) {
-  return (r * 180) / Math.PI;
-}
-
-function polarToCartesian(centerX: number, centerY: number, radius: number, angleInDegrees: number) {
-  const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
-  return {
-    x: centerX + radius * Math.cos(angleInRadians),
-    y: centerY + radius * Math.sin(angleInRadians),
-  };
-}
-
-function describeArc(x: number, y: number, radius: number, startAngle: number, endAngle: number) {
-  const start = polarToCartesian(x, y, radius, endAngle);
-  const end = polarToCartesian(x, y, radius, startAngle);
-  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-  const d = [`M ${start.x} ${start.y}`, `A ${radius} ${radius} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`].join(" ");
-  return d;
-}
-
 export default Comet;
-

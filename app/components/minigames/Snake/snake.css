@@ -5,12 +5,6 @@
   --accent-2: #50fa7b;
   --muted: #9aa4b2;
 }
-.snake-wrap{
-  display:flex;
-  gap:18px;
-  align-items:flex-start;
-  color:#e6eef8;
-}
 .snake-canvas{
   border-radius:8px;
   box-shadow: 0 6px 18px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
