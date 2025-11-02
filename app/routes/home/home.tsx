@@ -16,7 +16,7 @@ export default function Home() {
     {
       name: "Éloïk Rousseau",
       role: "Bac informatique",
-      bio: "Gerer le comportement du captcha",
+      bio: "Gérer le comportement du captcha",
     },
     {
       name: "Mathis Cantin",
@@ -26,7 +26,7 @@ export default function Home() {
     {
       name: "Kevin Boulanger",
       role: "Bac en génie informatique",
-      bio: "Développeur de l'étape Clicker",
+      bio: "Développeur de l'étape Clicker et Jeopardy",
     },
     {
       name: "Léanne Héroux",
