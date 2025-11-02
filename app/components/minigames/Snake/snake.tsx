@@ -10,7 +10,7 @@ const CELL_SIZE = 24; // pixels per cell (bigger so snake is clearly visible)
 const CANVAS_SIZE = GRID_SIZE * CELL_SIZE;
 const TICK_INITIAL = 120; // ms per move
 const ORB_SCORE = 10; // points per orb
-const WIN_SCORE = 200;
+const WIN_SCORE = 100;
 
 const randomPoint = (exclude: Point[] = []): Point => {
     while (true) {
