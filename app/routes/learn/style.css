@@ -57,3 +57,10 @@ body {
   background: #000;
   color: #fff;
 }
+
+/* Make sure the document root is also dark and fills the viewport when scrolling */
+html, body, #root, #__next {
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+}
